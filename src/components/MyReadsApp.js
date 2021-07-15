@@ -53,6 +53,7 @@ class MyReadsApp extends Component {
                         books={shelvesBooks}
                         shelf={shelf.shelf}
                         changeShelf={this.changeShelf}
+                        state={Books}
                       />
                     </div>
                   </div>
