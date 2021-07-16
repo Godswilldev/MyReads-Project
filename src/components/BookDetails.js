@@ -76,7 +76,6 @@ const BookDetails = (props) => {
   useEffect(() => {
     get(id).then((res) => setBooks(res));
   }, [id]);
-  console.log(books);
 
   return (
     <BookDetailsStyles>
