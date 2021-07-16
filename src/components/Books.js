@@ -6,10 +6,10 @@ class Books extends Component {
     const { book, index, changeShelf } = this.props;
     return (
       <div className="list-books">
-        <Link to={`/book/${book.id}`}>
-          <li key={index}>
-            <div className="book">
-              <div className="book-top">
+        <li key={index}>
+          <div className="book">
+            <div className="book-top">
+              <Link to={`/book/${book.id}`}>
                 <div
                   className="book-cover"
                   style={{
@@ -18,38 +18,38 @@ class Books extends Component {
                     backgroundImage: `url(${book.imageLinks?.thumbnail})`,
                   }}
                 />
+              </Link>
 
-                <div className="book-shelf-changer">
-                  <select
-                    onChange={(evt) => {
-                      this.setState({
-                        shelf: evt.target.value,
-                      });
-                      changeShelf(book, evt.target.value);
-                      alert(
-                        `${book.title} has been added to ${evt.target.value} shelf`
-                      );
-                    }}
-                  >
-                    <option disabled>Move to...</option>
-                    <option value="currentlyReading">Currently Reading</option>
-                    <option value="wantToRead">Want to Read</option>
-                    <option value="read">Read</option>
-                    <option value="">None</option>
-                  </select>
-                </div>
-                {/*  */}
+              <div className="book-shelf-changer">
+                <select
+                  onChange={(evt) => {
+                    this.setState({ shelf: evt.target.value });
+                    changeShelf(book, evt.target.value);
+                    alert(
+                      `${book.title} has been added to ${
+                        evt.target.value
+                      } shelf`
+                    );
+                  }}
+                >
+                  <option disabled>Move to...</option>
+                  <option value="currentlyReading">Currently Reading</option>
+                  <option value="wantToRead">Want to Read</option>
+                  <option value="read">Read</option>
+                  <option value="">None</option>
+                </select>
               </div>
-              <div className="book-title">{book.title}</div>
-              <div className="book-authors">
-                {book.authors &&
-                  book.authors.map((author, index) => (
-                    <p key={index}>{author}</p>
-                  ))}
-              </div>
+              {/*  */}
             </div>
-          </li>{" "}
-        </Link>
+            <div className="book-title">{book.title}</div>
+            <div className="book-authors">
+              {book.authors &&
+                book.authors.map((author, index) => (
+                  <p key={index}>{author}</p>
+                ))}
+            </div>
+          </div>
+        </li>{" "}
       </div>
     );
   }
