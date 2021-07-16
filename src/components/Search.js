@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { motion } from "framer-motion";
 import { getAll, update, search } from "../BooksAPI";
 import Books from "./Books";
 
@@ -58,18 +59,24 @@ class Search extends Component {
             />
           </div>
         </div>
+
         <div className="search-books-results">
           {/*  */}
           {this.state.searchResult.length > 1 && (
             <ol className="books-grid">
               {this.state.searchResult.map((book) => (
-                <div key={book.id}>
+                <motion.div
+                  key={book.id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: [0, 1] }}
+                  transition={{ duration: 0.5, delay: book.id / 5 }}
+                >
                   <Books
                     book={book}
                     index={book.id}
                     changeShelf={this.changeShelf}
                   />
-                </div>
+                </motion.div>
               ))}
             </ol>
           )}

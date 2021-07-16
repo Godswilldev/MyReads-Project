@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { motion } from "framer-motion";
 import Books from "./Books";
 
 class BookshelfBooks extends Component {
@@ -8,9 +9,14 @@ class BookshelfBooks extends Component {
       <div className="bookshelf-books">
         <ol className="books-grid">
           {books.map((book, index) => (
-            <div key={index}>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 1] }}
+              transition={{ duration: 1, delay: index / 5 }}
+            >
               <Books index={index} book={book} changeShelf={changeShelf} />
-            </div>
+            </motion.div>
           ))}
         </ol>
       </div>
