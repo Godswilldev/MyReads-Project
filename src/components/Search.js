@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { motion } from "framer-motion";
 import { getAll, update, search } from "../BooksAPI";
+import { Link } from "react-router-dom";
 import Books from "./Books";
 
 class Search extends Component {
@@ -16,19 +17,18 @@ class Search extends Component {
 
   handleChange = (e) => {
     const { name, value } = e.target;
-    this.setState(
-      {
-        [name]: value,
-      },
-      () =>
-        this.state.query !== "" &&
-        search(this.state.query.toLowerCase()).then((res) =>
-          this.setState({ searchResult: res })
-        )
-    );
+    this.setState({
+      [name]: value,
+    });
+    this.state.query !== "" &&
+      search(this.state.query.toLowerCase()).then((res) =>
+        this.setState({ searchResult: res })
+      );
+
+    this.bookShelfSync();
   };
 
-  changeShelf = (book, newShelf) =>
+  changeShelf = (book, newShelf) => {
     update(book, newShelf).then(() => {
       if (newShelf === "") {
         return;
@@ -41,14 +41,32 @@ class Search extends Component {
 
       this.setState({ Books: currentBooks });
     });
+  };
+
+  bookShelfSync = () => {
+    const Books = this.state.Books;
+    const searchResult = this.state.searchResult;
+    if (searchResult.length > 0) {
+      Books.forEach((book) =>
+        searchResult.forEach((result) => {
+          if (book.id === result.id) {
+            result.shelf = book.shelf;
+          }
+        })
+      );
+    }
+    this.setState({ searchResult: searchResult });
+  };
 
   render() {
+    console.log(this.state.searchResult);
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <button className="close-search" onClick={this.props.history.goBack}>
+          <Link className="close-search" to="/">
             Close
-          </button>
+          </Link>
           <div className="search-books-input-wrapper">
             <input
               name="query"
@@ -86,6 +104,7 @@ class Search extends Component {
                         book={book}
                         index={book.id}
                         changeShelf={this.changeShelf}
+                        bookShelfSYnc={this.bookShelfSync}
                       />
                     </motion.div>
                   ))}
