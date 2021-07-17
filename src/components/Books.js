@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class Books extends Component {
+  state = {
+    shelf: "",
+  };
   render() {
     const { book, index, changeShelf } = this.props;
     return (
@@ -22,8 +25,10 @@ class Books extends Component {
 
               <div className="book-shelf-changer">
                 <select
+                  value={this.state.shelf}
                   onChange={(evt) => {
-                    this.setState({ shelf: evt.target.value });
+                    !evt.target.value === "" &&
+                      this.setState({ shelf: evt.target.value });
                     changeShelf(book, evt.target.value);
                     alert(
                       `${book.title} has been added to ${

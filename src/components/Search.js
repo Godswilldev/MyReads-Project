@@ -21,10 +21,10 @@ class Search extends Component {
         [name]: value,
       },
       () =>
-        this.state.query &&
-        search(this.state.query.toLowerCase().trim()).then((res) => {
-          this.setState({ searchResult: res });
-        })
+        this.state.query !== "" &&
+        search(this.state.query.toLowerCase()).then((res) =>
+          this.setState({ searchResult: res })
+        )
     );
   };
 
@@ -54,31 +54,44 @@ class Search extends Component {
               name="query"
               type="text"
               placeholder="Search by title or author"
-              value={this.state.query.toLowerCase().trim()}
+              value={this.state.query.toLowerCase()}
               onChange={this.handleChange}
             />
           </div>
         </div>
 
-        <div className="search-books-results">
-          {/*  */}
-          {this.state.searchResult.length > 1 && (
-            <ol className="books-grid">
-              {this.state.searchResult.map((book) => (
-                <motion.div
-                  key={book.id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: [0, 1] }}
-                  transition={{ duration: 0.5, delay: book.id / 5 }}
-                >
-                  <Books
-                    book={book}
-                    index={book.id}
-                    changeShelf={this.changeShelf}
-                  />
-                </motion.div>
-              ))}
-            </ol>
+        <div
+          className="display"
+          style={{
+            display: this.state.query === "" ? "none" : "grid",
+          }}
+        >
+          {this.state.searchResult.error ? (
+            <h1 style={{ marginTop: "5rem", color: "#fff" }}>
+              No results found for this query
+            </h1>
+          ) : (
+            <div className="search-books-results">
+              {/*  */}
+              {this.state.searchResult.length > 1 && (
+                <ol className="books-grid">
+                  {this.state.searchResult.map((book) => (
+                    <motion.div
+                      key={book.id}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: [0, 1] }}
+                      transition={{ duration: 0.5, delay: book.id / 5 }}
+                    >
+                      <Books
+                        book={book}
+                        index={book.id}
+                        changeShelf={this.changeShelf}
+                      />
+                    </motion.div>
+                  ))}
+                </ol>
+              )}
+            </div>
           )}
         </div>
       </div>
