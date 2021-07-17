@@ -4,10 +4,6 @@
 
 MyReads is a bookshelf app that allows us to select and categorize books that we have read, currently reading, or want to read and also to view details of a particular book on a different page. The project emphasizes using React Fundamentals to build the application and provides an API server and client library to persist information as we interact with the application.
 
-## Project Review:
-
-This project has been reviewed by the Udacity project evaluator. You can read the whole review [Here](https://review.udacity.com/#!/reviews/1172349/shared)
-
 ## How to Load the App
 
 The project uses Node.js and the Create-React-App starter.  If you do not have Node >= 6.x installed, you can download it here: [Node.js](https://nodejs.org/en/)
