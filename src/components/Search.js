@@ -59,8 +59,6 @@ class Search extends Component {
   };
 
   render() {
-    console.log(this.state.searchResult);
-
     return (
       <div className="search-books">
         <div className="search-books-bar">

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { motion } from "framer-motion";
 import Books from "./Books";
-
+import uuid from "uuid/v4";
+import PropTypes from "prop-types";
 class BookshelfBooks extends Component {
   render() {
     const { books, changeShelf } = this.props;
@@ -10,7 +11,7 @@ class BookshelfBooks extends Component {
         <ol className="books-grid">
           {books.map((book, index) => (
             <motion.div
-              key={index}
+              key={uuid()}
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 1] }}
               transition={{ duration: 1, delay: index / 5 }}
@@ -23,5 +24,10 @@ class BookshelfBooks extends Component {
     );
   }
 }
+
+BookshelfBooks.propTypes = {
+  books: PropTypes.array.isRequired,
+  changeShelf: PropTypes.func,
+};
 
 export default BookshelfBooks;
