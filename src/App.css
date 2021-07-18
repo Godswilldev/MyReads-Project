@@ -23,7 +23,7 @@ body,
 
 .list-books-title {
   padding: 10px 0;
-  background: #c7b107;
+  background: #0ab1ff;
   box-shadow: 0.5rem 0.5rem 0.5rem #00000080;
   text-align: center;
   position: fixed;
@@ -77,7 +77,7 @@ body,
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #c7b107;
+  background: #0ab1ff;
   background-image: url("./icons/add.svg");
   background-repeat: no-repeat;
   background-position: center;
@@ -106,7 +106,7 @@ body,
 
 .search-books-input-wrapper {
   flex: 1;
-  background: #c7b107;
+  background: #0ab1ff;
 }
 
 .search-books-bar input {
@@ -168,7 +168,7 @@ button:active {
 
 .book-title {
   margin-top: 10px;
-  color: #c7b107;
+  color: #0ab1ff;
 }
 
 .book-authors {
@@ -189,7 +189,7 @@ button:active {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #c7b107;
+  background: #0ab1ff;
   background-image: url("./icons/arrow-drop-down.svg");
   background-repeat: no-repeat;
   background-position: center;

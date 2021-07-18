@@ -21,7 +21,7 @@ const BookDetailsStyles = styled.div`
   }
 
   strong {
-    color: #c7b107;
+    color: #0ab1ff;
   }
 
   .book {
