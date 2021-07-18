@@ -17,15 +17,16 @@ class Search extends Component {
 
   handleChange = (e) => {
     const { name, value } = e.target;
-    this.setState({
-      [name]: value,
-    });
-    this.state.query !== "" &&
-      search(this.state.query.toLowerCase()).then((res) =>
-        this.setState({ searchResult: res })
-      );
-
-    this.bookShelfSync();
+    this.setState(
+      {
+        [name]: value,
+      },
+      () =>
+        this.state.query !== "" &&
+        search(this.state.query.toLowerCase()).then((res) =>
+          this.bookShelfSync(res)
+        )
+    );
   };
 
   changeShelf = (book, newShelf) => {
@@ -43,19 +44,18 @@ class Search extends Component {
     });
   };
 
-  bookShelfSync = () => {
+  bookShelfSync = (shelves) => {
     const Books = this.state.Books;
-    const searchResult = this.state.searchResult;
-    if (searchResult.length > 0) {
+    if (shelves.length > 0) {
       Books.forEach((book) =>
-        searchResult.forEach((result) => {
+        shelves.forEach((result) => {
           if (book.id === result.id) {
             result.shelf = book.shelf;
           }
         })
       );
     }
-    this.setState({ searchResult: searchResult });
+    this.setState({ searchResult: shelves });
   };
 
   render() {

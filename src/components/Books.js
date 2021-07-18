@@ -6,16 +6,16 @@ class Books extends Component {
     shelf: this.props.book.shelf ? this.props.book.shelf : "",
   };
 
-  handleChange = (evt) => {
-    this.setState({ shelf: evt.target.value });
-    this.props.changeShelf(this.props.book, evt.target.value);
-    alert(
-      `${this.props.book.title} has been added to ${evt.target.value} shelf`
-    );
-  };
+  // handleChange = (evt) => {
+  //   this.setState({ shelf: evt.target.value });
+  //   this.props.changeShelf(this.props.book, evt.target.value);
+  //   alert(
+  //     `${this.props.book.title} has been added to ${evt.target.value} shelf`
+  //   );
+  // };
 
   render() {
-    const { book, index } = this.props;
+    const { book, index, changeShelf } = this.props;
     return (
       <div className="list-books">
         <li key={index}>
@@ -33,7 +33,17 @@ class Books extends Component {
               </Link>
 
               <div className="book-shelf-changer">
-                <select value={this.state.shelf} onChange={this.handleChange}>
+                <select
+                  value={this.state.shelf}
+                  onChange={(evt) => {
+                    !evt.target.value === "" &&
+                      this.setState({ shelf: evt.target.value });
+                    changeShelf(book, evt.target.value);
+                    alert(
+                      `${book.title} has been added to ${evt.target.value} shelf`
+                    );
+                  }}
+                >
                   <option disabled>Move to...</option>
                   <option value="currentlyReading">Currently Reading</option>
                   <option value="wantToRead">Want to Read</option>
