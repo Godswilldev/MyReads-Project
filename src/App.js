@@ -5,7 +5,7 @@ import Home from "./components/Home";
 import Search from "./components/Search";
 import BookDetails from "./components/BookDetails";
 import { pageVariants } from "./FramerMotion";
-
+import FourZeroFour from "./components/FourZeroFour";
 const App = () => {
   const location = useLocation();
   return (
@@ -56,6 +56,8 @@ const App = () => {
               </motion.div>
             )}
           />
+
+          <Route component={FourZeroFour} />
         </Switch>
       </AnimatePresence>
     </div>

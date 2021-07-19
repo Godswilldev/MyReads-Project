@@ -47,12 +47,10 @@ class Search extends Component {
   bookShelfSync = (shelves) => {
     const Books = this.state.Books;
     if (shelves.length > 0) {
-      Books.forEach((book) =>
-        shelves.forEach((result) => {
-          if (book.id === result.id) {
-            result.shelf = book.shelf;
-          }
-        })
+      Books.find((book) =>
+        shelves.find(
+          (result) => book.id === result.id && (result.shelf = book.shelf)
+        )
       );
     }
     this.setState({ searchResult: shelves });
